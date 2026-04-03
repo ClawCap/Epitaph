@@ -455,20 +455,9 @@ epitaph/
     └── feishu_qr.png                     ← 社区群二维码
 ```
 
-### 子模块来源
+### 子模块说明
 
-采集子模块直接复用照妖镜（Magic-Mirror）的采集模块，**不需要修改**——照妖镜和墓志铭使用相同的数据，只是分析角度不同。
-
-如果本项目下没有子模块目录，从 Magic-Mirror 复制：
-```bash
-# 从照妖镜复制采集子模块
-for platform in xiaohongshu douyin weibo douban bilibili; do
-  cp -r Magic-Mirror/${platform}-deep-profile-collect ./ 2>/dev/null
-done
-cp -r Magic-Mirror/workflows ./  2>/dev/null
-```
-
-或直接引用照妖镜的子模块路径（如果照妖镜已安装）。
+5 个平台的采集子模块已内置在本项目中，经过实际测试验证。每个子模块包含完整的导航路径、JS 脚本、XHR 拦截、滚动加载和容错处理。`workflows/` 目录包含对应的 MCP 执行脚本。
 
 ---
 
