@@ -192,20 +192,13 @@ mcp__{实例名}__{工具短名}
 
 ### 数据持久化（⚠️ 必须执行）
 
-**每个平台采集完毕后，立即将全量原始数据写入本地文件。每完成一个就保存一个。**
+**所有 ClawCap Skill 共享 `clawcap-data/` 目录**。采集前先检查是否已有数据可复用：
 
-```
-epitaph-data/
-├── douyin.json
-├── xiaohongshu.json
-├── weibo.json
-├── douban.json
-├── bilibili.json
-├── metadata.json
-└── {日期}_epitaph.md          ← 最终墓志铭
-```
+- `clawcap-data/self/{platform}.json` 存在 + < 7天 → **直接复用**，跳过采集
+- 存在 + > 7天 → 询问用户是否重新采集
+- 不存在 → 正常采集
 
-**执行方式**：子 Skill 的 JS 脚本将数据 `return JSON.stringify(...)` 返回到上下文后，**你必须立即将完整 JSON 写入对应文件**。保存完整数据（全部标题/评分/列表），不是摘要。
+**每个平台采集完毕后，立即将全量原始数据写入 `clawcap-data/self/{platform}.json`**。每完成一个就保存一个。保存完整数据，不是摘要。报告输出到 `clawcap-data/reports/epitaph_{日期}.md`。
 
 ---
 
