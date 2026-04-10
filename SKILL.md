@@ -190,13 +190,22 @@ mcp__{实例名}__{工具短名}
 
 > ⚠️ **子模块中的 JS 脚本必须完整复制执行**——不要"简化"或"优化"，容易丢失关键字段导致数据不全。
 
-### 采集完保存原始数据
+### 数据持久化（⚠️ 必须执行）
+
+**每个平台采集完毕后，立即将全量原始数据写入本地文件。每完成一个就保存一个。**
 
 ```
 epitaph-data/
-├── {日期}_raw_data.json       ← 全量原始数据
+├── douyin.json
+├── xiaohongshu.json
+├── weibo.json
+├── douban.json
+├── bilibili.json
+├── metadata.json
 └── {日期}_epitaph.md          ← 最终墓志铭
 ```
+
+**执行方式**：子 Skill 的 JS 脚本将数据 `return JSON.stringify(...)` 返回到上下文后，**你必须立即将完整 JSON 写入对应文件**。保存完整数据（全部标题/评分/列表），不是摘要。
 
 ---
 
